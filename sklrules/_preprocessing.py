@@ -52,9 +52,9 @@ class OneHotEncoder(SklearnOneHotEncoder):
 
         # remove NaN indicator columns
         idx = list(map(lambda x: bool(re.match(r'.*(?<!_missing_value)$', x)),
-                       self.get_feature_names(self.attributes_)))
+                       self.get_feature_names_out(self.attributes_)))
         feature_names_with_nan = [feature.replace('_', '=') for feature in
-                                  self.get_feature_names(self.attributes_)]
+                                  self.get_feature_names_out(self.attributes_)]
         filtered_categories = list(map(lambda x: x[x != 'missing_value'],
                                        self.categories_))
 

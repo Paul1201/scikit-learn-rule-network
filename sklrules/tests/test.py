@@ -274,8 +274,10 @@ def _to_sympy_syntax(f):
 
 
 # hyperparameters for hierarchical data test
-DATASETS = ['car-evaluation-binary', 'connect-4-binary', 'kr-vs-kp',
-            'monk-1', 'monk-2', 'monk-3', 'mushroom', 'tic-tac-toe', 'vote']
+DATASETS = [
+    #'car-evaluation-binary', 'connect-4-binary', 'kr-vs-kp',
+    #        'monk-1', 'monk-2', 'monk-3', 'mushroom', 'tic-tac-toe',
+    'vote']
 MAX_SAMPLES = 4000
 POS_CLASS_METHOD = 'most-frequent'  # 'boolean', 'least-frequent' or
 # 'most-frequent'
@@ -290,7 +292,8 @@ RANDOM_STATE = 0
 N_FOLDS = 2
 NOISE = 0.0
 
-HIDDEN_LAYER_SIZES = [[32, 16, 8, 4, 2], [32, 8, 2], [20]]
+#HIDDEN_LAYER_SIZES = [[32, 16, 8, 4, 2], [32, 8, 2], [20]]
+HIDDEN_LAYER_SIZES = [[20]]
 AVG_RULE_LENGTHS = {1: [5], 3: [3], 5: [2]}
 INIT_PROBS = [0.05]
 
@@ -302,7 +305,7 @@ SAVE_CSV = True
 KEYS = ['test_score']
 
 ts = TypeSelector(np.number, False)
-ohe = OneHotEncoder(sparse=False, handle_unknown='ignore')
+ohe = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
 skf = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=RANDOM_STATE)
 
 metrics = defaultdict(lambda: np.ndarray([0]))
@@ -313,7 +316,7 @@ if __name__ == '__main__':
 
     with cProfile.Profile() as pr:
         test_hierarchical_data()
-        test_simulated_network()
+        #test_simulated_network()
 
     sys.stdout = open('logs/test.prof', 'w')
     pr.print_stats(sort='tottime')
